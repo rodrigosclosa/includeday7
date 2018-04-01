@@ -5,7 +5,15 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>{{requestStatus}}</h2>
-  <img [src]="imagePath" class="home-image">
+  <img [src]="imagePath" class="home-image image-analysis" id="imagem-teste">
   <p>{{description}}</p>
+
+  <button ion-button color="secondary" (click)="getPicture()">
+    <ion-icon name="camera"></ion-icon>
+  </button>
+  
+  <button ion-button (click)="textToSpeech()">
+    <ion-icon name="play"></ion-icon>
+  </button>
+
 </ion-content>

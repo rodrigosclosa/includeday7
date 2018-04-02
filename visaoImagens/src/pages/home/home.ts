@@ -32,17 +32,18 @@ export class HomePage {
     private tts: TextToSpeech
   ) {
     camera = this.camera;
-    this.imagePath = 'http://images.equipboard.com/uploads/user/image/8602/big_layne-staley.jpg';
+    // this.imagePath = 'http://images.equipboard.com/uploads/user/image/8602/big_layne-staley.jpg';
     // this.imagePath = 'https://media-cdn.tripadvisor.com/media/photo-s/0c/13/af/b0/torre-eiffel.jpg';
     // this.imagePath = 'https://www.otvfoco.com.br/wp-content/uploads/2018/01/silvio-risonho.jpg';
-    this.buildLoader();
-    this.analyseImageTest(null);
+    this.imagePath = 'http://www.gardensbythebay.com.sg/etc/designs/gbb/clientlibs/images/common/not_found.jpg';
   }
 
-  buildLoader() {
+  showLoader() {
     this.loader = this.loadingController.create({
       content: "Processando ..."
     });
+
+    this.loader.present();
   }
 
   textToSpeech() {
@@ -70,7 +71,7 @@ export class HomePage {
   }
 
   getPicture() {
-    this.loader.present();
+    this.showLoader();
 
     this.camera.getPicture(this.options).then((imageData) => {
       this.imagePath = 'data:image/jpeg;base64,' + imageData;
@@ -84,28 +85,12 @@ export class HomePage {
     });
   }
 
-  base64ToByteArray(base64Image) {
-    let byteCharacters = atob(base64Image),
-        byteNumbers = new Array(byteCharacters.length),
-        byteArray;
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-
-    return new Uint8Array(byteNumbers);
-  };
-
-  analyseImageTest(imageBase64) {
-
-    this.loader.present();
+  analyseImageTest(base64Image) {
+    this.description = '';
 
     let body = {
-      url: this.imagePath
+      base64Image: base64Image
     }
-
-    // let body = this.base64ToByteArray(imageBase64);
-    // let body = imageBase64;
 
     this.congnitiveProvider.analyseImage(body).then(
       (result) => {
@@ -136,11 +121,12 @@ export class HomePage {
         console.log(result);
 
         if (result && result['data'] && result['data']['translations'] && result['data']['translations'].length > 0) {
-          this.description = result['data']['translations'][0]['translatedText'];
+          this.description = '#PraCegoVer: ' + result['data']['translations'][0]['translatedText'];
         } else {
           this.description = 'Nenhum texto identificado';
         }
 
+        this.textToSpeech();
         this.loader.dismiss();
       },
       (err) => {

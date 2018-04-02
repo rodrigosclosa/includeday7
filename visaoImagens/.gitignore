@@ -25,9 +25,8 @@ temp/
 hooks/
 plugins/
 $RECYCLE.BIN/
-www/
-www/build/
 platforms/
+www/
 
 .DS_Store
 Thumbs.db

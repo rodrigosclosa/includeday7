@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Google App Engine Deployment" type="gcp-app-engine-deploy" factoryName="Google App Engine Deployment" singleton="true" server-name="Google App Engine">
+    <deployment type="maven-build-source" name="backend" project="includeday-7" version="1">
+      <settings cloudProjectName="includeday-7" deployAllConfigs="true" environment="APP_ENGINE_STANDARD" googleUsername="rodrigogs@ciandt.com" promote="true" stopPreviousVersion="true" version="1" />
+    </deployment>
+    <method>
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/../backend/pom.xml" goal="endpoints-framework:openApiDocs" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/../backend/pom.xml" goal="package" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,9 @@
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/Category.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/Description.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/Caption.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/ComputerVisionInput.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/ComputerVisionOut.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/Color.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/model/Metadata.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/endpoint/ComputerVisionAzure.java
+/Users/rodrigogs/Documents/Repositorios/includeday7/backend/src/main/java/com/ciandt/includeday7/backend/service/ComputerVisionService.java

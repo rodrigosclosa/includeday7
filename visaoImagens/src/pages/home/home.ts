@@ -13,6 +13,7 @@ export class HomePage {
   imagePath: String;
   description: any;
   loader: any;
+  accuracy: String;
 
   options: CameraOptions = {
     quality: 50,
@@ -32,9 +33,6 @@ export class HomePage {
     private tts: TextToSpeech
   ) {
     camera = this.camera;
-    // this.imagePath = 'http://images.equipboard.com/uploads/user/image/8602/big_layne-staley.jpg';
-    // this.imagePath = 'https://media-cdn.tripadvisor.com/media/photo-s/0c/13/af/b0/torre-eiffel.jpg';
-    // this.imagePath = 'https://www.otvfoco.com.br/wp-content/uploads/2018/01/silvio-risonho.jpg';
     this.imagePath = 'http://www.gardensbythebay.com.sg/etc/designs/gbb/clientlibs/images/common/not_found.jpg';
   }
 
@@ -87,6 +85,7 @@ export class HomePage {
 
   analyseImageTest(base64Image) {
     this.description = '';
+    this.accuracy = `NA`;
 
     let body = {
       base64Image: base64Image
@@ -97,6 +96,9 @@ export class HomePage {
         console.log(result);
 
         if (result && result['description'] && result['description']['captions']) {
+          let confidence = result['description']['captions'][0]['confidence'] ? result['description']['captions'][0]['confidence'] * 100 : 'NA';
+          this.accuracy = `Confiança: ${Number(confidence).toFixed(2)}%`;
+
           this.translateTextToBr(result['description']['captions'][0]['text']);
         } else {
           this.description = 'Nenhum texto identificado';

@@ -4,4 +4,23 @@ page-home {
         width: 70%;
         margin-left: 15%;
     }
+
+    .description {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 500;
+    }
+
+    .accuracy {
+        font-size: 1.2em;
+        font-weight: 500;
+        color: blue;
+        text-align: center;
+    }
+
+    .button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

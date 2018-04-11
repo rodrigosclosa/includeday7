@@ -21,7 +21,7 @@ export class CognitiveApiProvider {
 
   analyseImage(body) {
     return new Promise((resolve, reject) => {
-      this.http.post(`${this.computerVisionBaseUrl}?key=${this.computerVisionApiKey}`,
+      this.http.put(`${this.computerVisionBaseUrl}?key=${this.computerVisionApiKey}`,
       JSON.stringify(body)
       )
         .subscribe(res => {

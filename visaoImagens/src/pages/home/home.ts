@@ -47,7 +47,7 @@ export class HomePage {
 
   textToSpeech() {
     this.tts.speak({
-      text: this.description,
+      text: "testing",
       locale: 'pt-BR',
       rate: 0.75
     })
@@ -61,7 +61,7 @@ export class HomePage {
 
   showAlert(message) {
     let alert = this.alertController.create({
-      title: 'Erro ao processar imagem',
+      title: 'Errom ao processar imagem',
       subTitle: message,
       buttons: ['Ok']
     });
@@ -102,7 +102,7 @@ export class HomePage {
 
           this.translateTextToBr(result['description']['captions'][0]['text']);
         } else {
-          this.description = 'Nenhum texto identificado';
+          this.description = 'Nenhun texto identificado';
         }
       },
       (err) => {

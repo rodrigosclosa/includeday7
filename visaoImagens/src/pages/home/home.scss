@@ -1,26 +1,18 @@
 page-home {
 
-    .image-analysis {
-        width: 70%;
-        margin-left: 15%;
+    background-color: #F6F5F9;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: auto;
     }
 
     .description {
-        text-align: center;
         font-size: 1.3em;
-        font-weight: 500;
     }
 
     .accuracy {
         font-size: 1.2em;
-        font-weight: 500;
-        color: blue;
-        text-align: center;
-    }
-
-    .button-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 }

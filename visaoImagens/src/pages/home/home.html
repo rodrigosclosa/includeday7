@@ -1,22 +1,42 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Image Analysis</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="openAbout()">
+          <ion-icon name="information-circle"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <img [src]="imagePath" class="home-image image-analysis" id="imagem-teste">
-  <p class="description">{{description}}</p>
-  <p class="accuracy">{{accuracy}}</p>
+<ion-content>
 
-  <div class="button-content">
-    <button ion-button color="secondary" (click)="getPicture()">
-      <ion-icon name="camera"></ion-icon>
-    </button>
-    
-    <button ion-button (click)="textToSpeech()">
-      <ion-icon name="play"></ion-icon>
-    </button>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-sm-10 offset-sm-1 col-md-8 offset-md-2>
+        <img [src]="imagePath" class="home-image image-analysis" id="imagem-teste">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-sm-10 offset-sm-1 col-md-8 offset-md-2>
+        <p class="description" text-center>{{description}}</p>
+        <p class="accuracy" text-center color="primary">{{accuracy}}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-sm-5 offset-sm-1 col-md-4 offset-md-2>
+        <button ion-button block color="primary" (click)="getPicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-sm-5 offset-sm-1 col-md-4 offset-md-0>
+        <button ion-button block color="secondary" (click)="textToSpeech()">
+          <ion-icon name="play"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

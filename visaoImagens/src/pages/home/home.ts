@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController } from 'ionic-angular
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { CognitiveApiProvider } from '../../providers/cognitive-api/cognitive-api';
+import { AboutPage } from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -33,12 +34,12 @@ export class HomePage {
     private tts: TextToSpeech
   ) {
     camera = this.camera;
-    this.imagePath = 'http://www.gardensbythebay.com.sg/etc/designs/gbb/clientlibs/images/common/not_found.jpg';
+    this.imagePath = '../assets/imgs/no-image.jpg';
   }
 
   showLoader() {
     this.loader = this.loadingController.create({
-      content: "Processando ..."
+      content: "Processando..."
     });
 
     this.loader.present();
@@ -139,4 +140,7 @@ export class HomePage {
     );
   }
 
+  openAbout() {
+    this.navCtrl.push(AboutPage);
+  }
 }

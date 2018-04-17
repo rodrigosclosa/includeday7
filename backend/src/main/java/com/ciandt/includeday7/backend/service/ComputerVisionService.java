@@ -2,6 +2,7 @@ package com.ciandt.includeday7.backend.service;
 
 import com.ciandt.includeday7.backend.model.ComputerVisionInput;
 import com.ciandt.includeday7.backend.model.ComputerVisionOut;
+import com.ciandt.includeday7.backend.utils.LoggerHelper;
 import com.google.api.server.spi.response.ConflictException;
 import endpoints.repackaged.com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
@@ -16,10 +17,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.net.URI;
+import java.util.logging.Logger;
 
 public class ComputerVisionService {
-    public static final String subscriptionKey = "911dad9c187d48509e1763b87aa29698";
-    public static final String uriBase = "https://brazilsouth.api.cognitive.microsoft.com/vision/v1.0/analyze";
+    private static final Logger log = Logger.getLogger(ComputerVisionService.class.getName());
+    public static final String subscriptionKey = "b1f2c51a9087420380f294b683742071";
+    public static final String uriBase = "https://westus.api.cognitive.microsoft.com/vision/v1.0/describe";
 
     public ComputerVisionService() {
     }
@@ -34,8 +37,9 @@ public class ComputerVisionService {
             URIBuilder builder = new URIBuilder(uriBase);
 
             // Request parameters. All of them are optional.
-            builder.setParameter("visualFeatures", "Categories,Description,Color");
-            builder.setParameter("language", "en");
+            //builder.setParameter("visualFeatures", "Categories,Description,Color");
+            //builder.setParameter("language", "en");
+            builder.setParameter("maxCandidates", "1");
 
             // Prepare the URI for the REST API call.
             URI uri = builder.build();
@@ -48,9 +52,15 @@ public class ComputerVisionService {
             byte[] image = Base64.decodeBase64(newBase64.getBytes());
             request.setEntity(new ByteArrayEntity(image));
 
+            //LoggerHelper.getInstance(log).log("Request Vision: ", request);
+            //LoggerHelper.getInstance(log).log("HTTPClient Vision: ", httpclient);
+
             // Execute the REST API call and get the response entity.
             HttpResponse response = httpclient.execute(request);
             HttpEntity entity = response.getEntity();
+
+            LoggerHelper.getInstance(log).log("Response Vision: ", response);
+            LoggerHelper.getInstance(log).log("Entity Vision: ", entity);
 
             if (entity != null) {
                 // Format and display the JSON response.
@@ -63,6 +73,7 @@ public class ComputerVisionService {
         }
         catch (Exception e)
         {
+            LoggerHelper.getInstance(log).log("Error Vision: ", e);
             throw new ConflictException("Erro ao processar o request no Computer Vision: " + e.getMessage());
         }
 

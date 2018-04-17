@@ -1,6 +1,7 @@
 com/ciandt/includeday7/backend/model/Description.class
 com/ciandt/includeday7/backend/model/Category.class
 com/ciandt/includeday7/backend/model/ComputerVisionOut.class
+com/ciandt/includeday7/backend/utils/LoggerHelper.class
 com/ciandt/includeday7/backend/model/Metadata.class
 com/ciandt/includeday7/backend/endpoint/ComputerVisionAzure.class
 com/ciandt/includeday7/backend/service/ComputerVisionService.class

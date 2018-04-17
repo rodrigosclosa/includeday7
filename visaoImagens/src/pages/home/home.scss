@@ -1,7 +1,18 @@
 page-home {
 
-    .image-analysis {
-        width: 70%;
-        margin-left: 15%;
+    background-color: #F6F5F9;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .description {
+        font-size: 1.3em;
+    }
+
+    .accuracy {
+        font-size: 1.2em;
     }
 }

@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController } from 'ionic-angular
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { CognitiveApiProvider } from '../../providers/cognitive-api/cognitive-api';
+import { AboutPage } from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -13,6 +14,7 @@ export class HomePage {
   imagePath: String;
   description: any;
   loader: any;
+  accuracy: String;
 
   options: CameraOptions = {
     quality: 50,
@@ -32,17 +34,15 @@ export class HomePage {
     private tts: TextToSpeech
   ) {
     camera = this.camera;
-    this.imagePath = 'http://images.equipboard.com/uploads/user/image/8602/big_layne-staley.jpg';
-    // this.imagePath = 'https://media-cdn.tripadvisor.com/media/photo-s/0c/13/af/b0/torre-eiffel.jpg';
-    // this.imagePath = 'https://www.otvfoco.com.br/wp-content/uploads/2018/01/silvio-risonho.jpg';
-    this.buildLoader();
-    this.analyseImageTest(null);
+    this.imagePath = 'assets/imgs/no-image.jpg';
   }
 
-  buildLoader() {
+  showLoader() {
     this.loader = this.loadingController.create({
-      content: "Processando ..."
+      content: "Processando..."
     });
+
+    this.loader.present();
   }
 
   textToSpeech() {
@@ -70,7 +70,7 @@ export class HomePage {
   }
 
   getPicture() {
-    this.loader.present();
+    this.showLoader();
 
     this.camera.getPicture(this.options).then((imageData) => {
       this.imagePath = 'data:image/jpeg;base64,' + imageData;
@@ -84,34 +84,22 @@ export class HomePage {
     });
   }
 
-  base64ToByteArray(base64Image) {
-    let byteCharacters = atob(base64Image),
-        byteNumbers = new Array(byteCharacters.length),
-        byteArray;
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-
-    return new Uint8Array(byteNumbers);
-  };
-
-  analyseImageTest(imageBase64) {
-
-    this.loader.present();
+  analyseImageTest(base64Image) {
+    this.description = '';
+    this.accuracy = `NA`;
 
     let body = {
-      url: this.imagePath
+      base64Image: base64Image
     }
-
-    // let body = this.base64ToByteArray(imageBase64);
-    // let body = imageBase64;
 
     this.congnitiveProvider.analyseImage(body).then(
       (result) => {
         console.log(result);
 
         if (result && result['description'] && result['description']['captions']) {
+          let confidence = result['description']['captions'][0]['confidence'] ? result['description']['captions'][0]['confidence'] * 100 : 'NA';
+          this.accuracy = `Confiança: ${Number(confidence).toFixed(2)}%`;
+
           this.translateTextToBr(result['description']['captions'][0]['text']);
         } else {
           this.description = 'Nenhum texto identificado';
@@ -136,11 +124,12 @@ export class HomePage {
         console.log(result);
 
         if (result && result['data'] && result['data']['translations'] && result['data']['translations'].length > 0) {
-          this.description = result['data']['translations'][0]['translatedText'];
+          this.description = '#PraCegoVer: ' + result['data']['translations'][0]['translatedText'];
         } else {
           this.description = 'Nenhum texto identificado';
         }
 
+        this.textToSpeech();
         this.loader.dismiss();
       },
       (err) => {
@@ -151,4 +140,7 @@ export class HomePage {
     );
   }
 
+  openAbout() {
+    this.navCtrl.push(AboutPage);
+  }
 }

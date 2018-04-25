@@ -34,7 +34,7 @@ export class HomePage {
     private tts: TextToSpeech
   ) {
     camera = this.camera;
-    this.imagePath = '../assets/imgs/no-image.jpg';
+    this.imagePath = 'assets/imgs/no-image.jpg';
   }
 
   showLoader() {

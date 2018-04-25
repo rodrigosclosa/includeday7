@@ -17,9 +17,15 @@
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
     <runtime>java8</runtime>
     <threadsafe>true</threadsafe>
+    <application>includeday-7</application>
+    <version>1</version>
 
+    <instance-class>B2</instance-class>
     <basic-scaling>
         <max-instances>2</max-instances>
+        <!-- Production Config -->
+        <idle-timeout>10m</idle-timeout>
+        <!-- Dev/Homolog Config -->
     </basic-scaling>
 
     <system-properties>
